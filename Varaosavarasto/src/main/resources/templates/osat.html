@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Varaosalista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;  
+  width: 50%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;  
+}
+
+table tbody tr:nth-child(even){background-color: #f2f2f2;}
+
+table tbody tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: red;
+}
+
+.poista{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;	
+}</style>
+<body>
+	<h1>Varaosat</h1>
+    <table>
+		<tr>
+		    <th>Nimi</th>
+		    <th>Hinta</th>
+			<th>Paino</th>
+		    <th>Vuosi</th>
+		    <th>Omistaja</th>
+		    <th>Merkki</th>
+		    <th>Muokkaa</th>
+		    <th>Poista</th>
+		</tr>  
+		<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    	<tr th:each = "osa : ${osat}">
+    		<td th:text="${osa.name}"></td>
+    		<td th:text="${osa.price}"></td>
+    		<td th:text="${osa.weight}"></td>
+    		<td th:text="${osa.year}"></td>
+    		<td th:text="${osa.auto.name}"></td>
+    		<td th:text="${osa.auto.merkki}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editOsa/{id}(id=${osa.id})}">Muokkaa</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${osa.id})}">Poista</a></td>	
+ 			
+    	</tr>
+     </table>
+     <a href="/addOsa">Add osa</a>
+     <a th:href="@{/autot}"> Autot </a>
+     
+     
+</body>
+</html>

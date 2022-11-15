@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>autot</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;  
+  width: 50%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;  
+}
+
+table tbody tr:nth-child(even){background-color: #f2f2f2;}
+
+table tbody tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: red;
+}
+
+.poista{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;	
+}</style>
+<body>
+	<h1>Autot</h1>
+    <table>
+		<tr>
+		    <th>Nimi</th>
+		    <th>Merkki</th>
+		    <th>Malli</th>
+		    <th>Year Of Birth</th>
+		</tr>  
+    	<tr th:each = "auto : ${autot}">
+    		<td th:text="${auto.Name}"></td>
+    		<td th:text="${auto.Merkki}"></td>
+    		<td th:text="${auto.Malli}"></td>
+    		<td th:text="${auto.yob}"></td>
+    	</tr>
+     </table>
+     <a href="/addAuto">Add new owner</a>
+     <a th:href="@{/osat}"> Osat </a>
+     
+</body>
+</html>

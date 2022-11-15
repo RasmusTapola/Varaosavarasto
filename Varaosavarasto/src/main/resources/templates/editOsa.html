@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;  
+  width: 50%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;  
+}
+
+table tbody tr:nth-child(even){background-color: #f2f2f2;}
+
+table tbody tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: red;
+}
+
+.poista{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;	
+}</style>
+<body>
+	<h1>Edit car</h1>
+	<div>
+	<form th:object="${editOsa}" th:action="@{/saveOsa}" action="#" method="post">
+		  	<input type="hidden" id="id" th:field="*{id}" />
+		  	<div>
+		  	<label>nimi</label>
+			<input type="text" th:field="*{name}" />
+			</div>
+			<div>
+		  	<label>hinta</label>
+		  	<input type="number" th:field="*{price}" />
+			</div>
+			<div>
+		  	<label>paino</label>
+			<input type="number" th:field="*{weight}" />
+			</div>
+			<div>		
+		  	<label>Year Of Construction</label>
+			<input type="number" th:field="*{year}" />
+			</div>
+			<br>
+		  	<label>Auto</label>
+			 <select id="autot" th:field="*{auto}">
+       			<option th:each="auto: ${autot}" th:value="${auto.id}" th:text="${auto.Nimi}"></option>
+    		</select>			
+			<input type="submit" value="Save"></input>
+		</form>
+	
+	</div>
+
+ 	
+</body>
+</html>
